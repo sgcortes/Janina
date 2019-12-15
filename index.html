@@ -8,9 +8,10 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
-            width: 910px;
+            width: 1482px;
             height: 867px;
         }
         </style>
@@ -28,6 +29,7 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
         <script src="data/HRMecosystemtypesLibi_1.js"></script>
         <script src="data/JaninaLimits_2.js"></script>
         <script>
@@ -48,9 +50,21 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[50.03978710911299,19.235936423929758],[50.145994761793524,19.40749367633978]]);
+        }).fitBounds([[50.038089108545265,19.183636858122785],[50.152213576881074,19.451675480236855]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
@@ -126,210 +140,210 @@
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(128,255,0,1.0)',
+                fillColor: 'rgba(128,255,0,0.5)',
             }
                     break;
                 case 'Complex cultivation patterns':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,230,77,1.0)',
+                fillColor: 'rgba(255,230,77,0.5)',
             }
                     break;
                 case 'Coniferous forest':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(0,166,0,1.0)',
+                fillColor: 'rgba(0,166,0,0.5)',
             }
                     break;
                 case 'Discontinuous urban fabric':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,1.0)',
+                fillColor: 'rgba(255,0,0,0.5)',
             }
                     break;
                 case 'Dump sites':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(166,77,0,1.0)',
+                fillColor: 'rgba(166,77,0,0.5)',
             }
                     break;
                 case 'Green urban areas':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,166,255,1.0)',
+                fillColor: 'rgba(255,166,255,0.5)',
             }
                     break;
                 case 'Industrial or commercial units':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(204,77,242,1.0)',
+                fillColor: 'rgba(204,77,242,0.5)',
             }
                     break;
                 case 'Mineral extraction sites':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(166,0,204,1.0)',
+                fillColor: 'rgba(166,0,204,0.5)',
             }
                     break;
                 case 'Mixed forest':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(77,255,0,1.0)',
+                fillColor: 'rgba(77,255,0,0.5)',
             }
                     break;
                 case 'Natural grasslands':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(204,242,77,1.0)',
+                fillColor: 'rgba(204,242,77,0.5)',
             }
                     break;
                 case 'Non-irrigated arable land':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,255,168,1.0)',
+                fillColor: 'rgba(255,255,168,0.5)',
             }
                     break;
                 case 'Pastures':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(230,230,77,1.0)',
+                fillColor: 'rgba(230,230,77,0.5)',
             }
                     break;
                 case 'Sport and leisure facilities':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,230,255,1.0)',
+                fillColor: 'rgba(255,230,255,0.5)',
             }
                     break;
                 case 'Transitional woodland-shrub':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(166,242,0,1.0)',
+                fillColor: 'rgba(166,242,0,0.5)',
             }
                     break;
                 case 'Water bodies':
                     return {
                 pane: 'pane_HRMecosystemtypesLibi_1',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.5)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(128,242,230,1.0)',
+                fillColor: 'rgba(128,242,230,0.5)',
             }
                     break;
             }
@@ -360,7 +374,7 @@
             return {
                 pane: 'pane_JaninaLimits_2',
                 opacity: 1,
-                color: 'rgba(245,35,35,1.0)',
+                color: 'rgba(245,35,35,0.507)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
