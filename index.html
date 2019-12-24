@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
-            width: 1482px;
+            width: 1282px;
             height: 867px;
         }
         </style>
@@ -30,8 +30,8 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/HRMecosystemtypesLibi_1.js"></script>
-        <script src="data/JaninaLimits_2.js"></script>
+        <script src="data/JaninaLimits_1.js"></script>
+        <script src="data/HRMecosystemtypesCLC_2.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -50,7 +50,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[50.038089108545265,19.183636858122785],[50.152213576881074,19.451675480236855]]);
+        }).fitBounds([[50.04382746892654,19.196753083701054],[50.15517588579091,19.4310732916403]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
         var measureControl = new L.Control.Measure({
@@ -74,7 +74,41 @@
         });
         layer_GoogleSatellite_0;
         map.addLayer(layer_GoogleSatellite_0);
-        function pop_HRMecosystemtypesLibi_1(feature, layer) {
+        function pop_JaninaLimits_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JaninaLimits_1_0() {
+            return {
+                pane: 'pane_JaninaLimits_1',
+                opacity: 1,
+                color: 'rgba(245,35,35,0.507)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 7.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_JaninaLimits_1');
+        map.getPane('pane_JaninaLimits_1').style.zIndex = 401;
+        map.getPane('pane_JaninaLimits_1').style['mix-blend-mode'] = 'normal';
+        var layer_JaninaLimits_1 = new L.geoJson(json_JaninaLimits_1, {
+            attribution: '',
+            pane: 'pane_JaninaLimits_1',
+            onEachFeature: pop_JaninaLimits_1,
+            style: style_JaninaLimits_1_0,
+        });
+        bounds_group.addLayer(layer_JaninaLimits_1);
+        map.addLayer(layer_JaninaLimits_1);
+        function pop_HRMecosystemtypesCLC_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -85,7 +119,7 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ID'] !== null ? Autolinker.link(String(feature.properties['ID'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['ID2'] !== null ? Autolinker.link(String(feature.properties['ID2'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['LABEL1'] !== null ? Autolinker.link(String(feature.properties['LABEL1'])) : '') + '</td>\
@@ -105,295 +139,248 @@
                         <td>' + (feature.properties['CLC_lv3'] !== null ? Autolinker.link(String(feature.properties['CLC_lv3'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['1_CICESv51'] !== null ? Autolinker.link(String(feature.properties['1_CICESv51'])) : '') + '</td>\
+                        <th scope="row">Area(Ha)</th>\
+                        <td>' + (feature.properties['Area(Ha)'] !== null ? Autolinker.link(String(feature.properties['Area(Ha)'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['2_CICESv51'] !== null ? Autolinker.link(String(feature.properties['2_CICESv51'])) : '') + '</td>\
+                        <th scope="row">Per(km)</th>\
+                        <td>' + (feature.properties['Per(km)'] !== null ? Autolinker.link(String(feature.properties['Per(km)'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['3_CICESv51'] !== null ? Autolinker.link(String(feature.properties['3_CICESv51'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['4_CICESv51'] !== null ? Autolinker.link(String(feature.properties['4_CICESv51'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(String(feature.properties['5_CICESv51'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">AREA(Ha)</th>\
-                        <td>' + (feature.properties['AREA(Ha)'] !== null ? Autolinker.link(String(feature.properties['AREA(Ha)'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">CLCareasum</th>\
-                        <td>' + (feature.properties['CLCareasum'] !== null ? Autolinker.link(String(feature.properties['CLCareasum'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['JaninaCLCareaSum_None'] !== null ? Autolinker.link(String(feature.properties['JaninaCLCareaSum_None'])) : '') + '</td>\
+                        <th scope="row">CLCAreaSum</th>\
+                        <td>' + (feature.properties['CLCAreaSum'] !== null ? Autolinker.link(String(feature.properties['CLCAreaSum'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_HRMecosystemtypesLibi_1_0(feature) {
+        function style_HRMecosystemtypesCLC_2_0(feature) {
             switch(String(feature.properties['LABEL3'])) {
                 case 'Broad-leaved forest':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(128,255,0,0.5)',
+                fillColor: 'rgba(128,255,0,0.503)',
             }
                     break;
                 case 'Complex cultivation patterns':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,230,77,0.5)',
+                fillColor: 'rgba(255,230,77,0.503)',
             }
                     break;
                 case 'Coniferous forest':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(0,166,0,0.5)',
+                fillColor: 'rgba(0,166,0,0.503)',
             }
                     break;
                 case 'Discontinuous urban fabric':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,0.5)',
+                fillColor: 'rgba(255,0,0,0.503)',
             }
                     break;
                 case 'Dump sites':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(166,77,0,0.5)',
+                fillColor: 'rgba(166,77,0,0.503)',
             }
                     break;
                 case 'Green urban areas':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,166,255,0.5)',
+                fillColor: 'rgba(255,166,255,0.503)',
             }
                     break;
                 case 'Industrial or commercial units':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(204,77,242,0.5)',
+                fillColor: 'rgba(204,77,242,0.503)',
             }
                     break;
                 case 'Mineral extraction sites':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(166,0,204,0.5)',
+                fillColor: 'rgba(166,0,204,0.503)',
             }
                     break;
                 case 'Mixed forest':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(77,255,0,0.5)',
+                fillColor: 'rgba(77,255,0,0.503)',
             }
                     break;
                 case 'Natural grasslands':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(204,242,77,0.5)',
+                fillColor: 'rgba(204,242,77,0.503)',
             }
                     break;
                 case 'Non-irrigated arable land':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,255,168,0.5)',
+                fillColor: 'rgba(255,255,168,0.503)',
             }
                     break;
                 case 'Pastures':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(230,230,77,0.5)',
+                fillColor: 'rgba(230,230,77,0.503)',
             }
                     break;
                 case 'Sport and leisure facilities':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,230,255,0.5)',
+                fillColor: 'rgba(255,230,255,0.503)',
             }
                     break;
                 case 'Transitional woodland-shrub':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(166,242,0,0.5)',
+                fillColor: 'rgba(166,242,0,0.503)',
             }
                     break;
                 case 'Water bodies':
                     return {
-                pane: 'pane_HRMecosystemtypesLibi_1',
+                pane: 'pane_HRMecosystemtypesCLC_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.5)',
+                color: 'rgba(35,35,35,0.503)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(128,242,230,0.5)',
+                fillColor: 'rgba(128,242,230,0.503)',
             }
                     break;
             }
         }
-        map.createPane('pane_HRMecosystemtypesLibi_1');
-        map.getPane('pane_HRMecosystemtypesLibi_1').style.zIndex = 401;
-        map.getPane('pane_HRMecosystemtypesLibi_1').style['mix-blend-mode'] = 'normal';
-        var layer_HRMecosystemtypesLibi_1 = new L.geoJson(json_HRMecosystemtypesLibi_1, {
+        map.createPane('pane_HRMecosystemtypesCLC_2');
+        map.getPane('pane_HRMecosystemtypesCLC_2').style.zIndex = 402;
+        map.getPane('pane_HRMecosystemtypesCLC_2').style['mix-blend-mode'] = 'normal';
+        var layer_HRMecosystemtypesCLC_2 = new L.geoJson(json_HRMecosystemtypesCLC_2, {
             attribution: '',
-            pane: 'pane_HRMecosystemtypesLibi_1',
-            onEachFeature: pop_HRMecosystemtypesLibi_1,
-            style: style_HRMecosystemtypesLibi_1_0,
+            pane: 'pane_HRMecosystemtypesCLC_2',
+            onEachFeature: pop_HRMecosystemtypesCLC_2,
+            style: style_HRMecosystemtypesCLC_2_0,
         });
-        bounds_group.addLayer(layer_HRMecosystemtypesLibi_1);
-        map.addLayer(layer_HRMecosystemtypesLibi_1);
-        function pop_JaninaLimits_2(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-        }
-
-        function style_JaninaLimits_2_0() {
-            return {
-                pane: 'pane_JaninaLimits_2',
-                opacity: 1,
-                color: 'rgba(245,35,35,0.507)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 7.0, 
-                fillOpacity: 0,
-            }
-        }
-        map.createPane('pane_JaninaLimits_2');
-        map.getPane('pane_JaninaLimits_2').style.zIndex = 402;
-        map.getPane('pane_JaninaLimits_2').style['mix-blend-mode'] = 'normal';
-        var layer_JaninaLimits_2 = new L.geoJson(json_JaninaLimits_2, {
-            attribution: '',
-            pane: 'pane_JaninaLimits_2',
-            onEachFeature: pop_JaninaLimits_2,
-            style: style_JaninaLimits_2_0,
-        });
-        bounds_group.addLayer(layer_JaninaLimits_2);
+        bounds_group.addLayer(layer_HRMecosystemtypesCLC_2);
+        map.addLayer(layer_HRMecosystemtypesCLC_2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/JaninaLimits_2.png" /> Janina Limits': layer_JaninaLimits_2,'HRM ecosystem types Libiąż<br /><table><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Broadleavedforest0.png" /></td><td>Broad-leaved forest</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Complexcultivationpatterns1.png" /></td><td>Complex cultivation patterns</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Coniferousforest2.png" /></td><td>Coniferous forest</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Discontinuousurbanfabric3.png" /></td><td>Discontinuous urban fabric</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Dumpsites4.png" /></td><td>Dump sites</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Greenurbanareas5.png" /></td><td>Green urban areas</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Industrialorcommercialunits6.png" /></td><td>Industrial or commercial units</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Mineralextractionsites7.png" /></td><td>Mineral extraction sites</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Mixedforest8.png" /></td><td>Mixed forest</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Naturalgrasslands9.png" /></td><td>Natural grasslands</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Nonirrigatedarableland10.png" /></td><td>Non-irrigated arable land</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Pastures11.png" /></td><td>Pastures</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Sportandleisurefacilities12.png" /></td><td>Sport and leisure facilities</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Transitionalwoodlandshrub13.png" /></td><td>Transitional woodland-shrub</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesLibi_1_Waterbodies14.png" /></td><td>Water bodies</td></tr></table>': layer_HRMecosystemtypesLibi_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'HRM ecosystem types CLC<br /><table><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Broadleavedforest0.png" /></td><td>Broad-leaved forest</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Complexcultivationpatterns1.png" /></td><td>Complex cultivation patterns</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Coniferousforest2.png" /></td><td>Coniferous forest</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Discontinuousurbanfabric3.png" /></td><td>Discontinuous urban fabric</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Dumpsites4.png" /></td><td>Dump sites</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Greenurbanareas5.png" /></td><td>Green urban areas</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Industrialorcommercialunits6.png" /></td><td>Industrial or commercial units</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Mineralextractionsites7.png" /></td><td>Mineral extraction sites</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Mixedforest8.png" /></td><td>Mixed forest</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Naturalgrasslands9.png" /></td><td>Natural grasslands</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Nonirrigatedarableland10.png" /></td><td>Non-irrigated arable land</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Pastures11.png" /></td><td>Pastures</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Sportandleisurefacilities12.png" /></td><td>Sport and leisure facilities</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Transitionalwoodlandshrub13.png" /></td><td>Transitional woodland-shrub</td></tr><tr><td style="text-align: center;"><img src="legend/HRMecosystemtypesCLC_2_Waterbodies14.png" /></td><td>Water bodies</td></tr></table>': layer_HRMecosystemtypesCLC_2,'<img src="legend/JaninaLimits_1.png" /> Janina Limits': layer_JaninaLimits_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
